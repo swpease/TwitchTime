@@ -5,6 +5,13 @@
   "version": "0.1",
 
   "description": "Adds an indicator of how long you have watched a Twitch channel.",
-  "homepage_url": "https://github.com/swpease/TwitchTime"
+  "homepage_url": "https://github.com/swpease/TwitchTime",
+
+  "content_scripts": [
+    {
+      "matches": ["*://*.twitch.tv/*"],
+      "js": ["content_scripts/content_script.js"]
+    }
+  ]
 
 }
