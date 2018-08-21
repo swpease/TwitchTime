@@ -25,6 +25,32 @@ function getChannelName() {
 }
 
 /**
+ * Inserts a text element next to the Follow and Subscribe buttons on a
+ * Twitch channel.
+ * @param {Object.<string, string>} channelTime - The channel name and time, in seconds.
+ */
+function injectTimeIndicator(channelTime) {
+  return
+}
+
+/**
+ * Generic error handler.
+ */
+function onError(error) {
+  console.log(error);
+}
+
+/**
+ * Injects an Element onto the Twitch page indicating the time spent watching
+ * the channel.
+ * @param {string} channelName - The channel name.
+ */
+function setupForChannel(channelName) {
+  let gettingChannelTime = browser.storage.sync.get({ [channelName]: "0" });
+  gettingChannelTime.then(injectTimeIndicator, onError);
+}
+
+/**
  * If it can find a channel name, it either:
  *  - calls a function to update the time spent watching
  *  - calls a function to set stuff up for a newly navigated-to channel
@@ -36,7 +62,7 @@ function main() {
     if (channelName === CURRENT_CHANNEL) {
       return
     } else {
-      return
+      setupForChannel(channelName)
     }
   } catch (e) {
     CURRENT_CHANNEL = "";
