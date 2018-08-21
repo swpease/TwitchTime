@@ -30,7 +30,16 @@ function getChannelName() {
  * @param {Object.<string, string>} channelTime - The channel name and time, in seconds.
  */
 function injectTimeIndicator(channelTime) {
-  return
+  const time = Object.values(channelTime)[0];  // Should have one k:v pair.
+
+  let div = document.createElement("div");
+  let text = document.createTextNode(`Watch Time: ${time}`);
+
+  div.className = "twitch-time-display"
+  div.appendChild(text);
+
+  let parent = document.querySelector("main div.channel-header__right")  // Brittle.
+  parent.appendChild(div);
 }
 
 /**
