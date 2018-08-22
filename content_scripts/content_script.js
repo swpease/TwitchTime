@@ -50,9 +50,10 @@ function formatTime(time) {
  */
 function injectTimeIndicator(channelTime) {
   const time = Object.values(channelTime)[0];  // Should have one k:v pair.
+  const formattedTime = formatTime(time);
 
   let div = document.createElement("div");
-  let text = document.createTextNode(`Watch Time: ${time}`);
+  let text = document.createTextNode(formattedTime);
 
   div.className = "twitch-time-display"
   div.appendChild(text);
