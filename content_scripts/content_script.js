@@ -82,6 +82,15 @@ function setupForChannel(channelName) {
 }
 
 /**
+ * Saves the new time spent watching to sync storage, and calls a UI updater.
+ */
+function addWatchTime() {
+  CHANNEL_TIME += INTERVAL_SECONDS;
+  let storingChannelTime = browser.storage.sync.set({ [CURRENT_CHANNEL]: CHANNEL_TIME});
+  storingChannelTime.then(() => 0, onError);
+}
+
+/**
  * If it can find a channel name, it either:
  *  - calls a function to update the time spent watching
  *  - calls a function to set stuff up for a newly navigated-to channel
