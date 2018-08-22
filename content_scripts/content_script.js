@@ -1,4 +1,6 @@
 var CURRENT_CHANNEL = "";
+var CHANNEL_TIME = 0;
+var INTERVAL_SECONDS = 2;
 
 /**
  * Gets the Twitch channel name if available. Raises an Error if name not found.
@@ -26,12 +28,11 @@ function getChannelName() {
 
 /**
  * Converts time in seconds to the form: `Watched: [${d} d] ${h} h`
- * @param {string} time - Time, in seconds.
+ * @param {number} time - Time, in seconds.
  * @return {string} A formatted time string.
  */
 function formatTime(time) {
-  const parsedTime = parseInt(time, 10);
-  const timeInHours = Math.floor(parsedTime / 3600);
+  const timeInHours = Math.floor(time / 3600);
 
   const days = Math.floor(timeInHours / 24);
   const hours = timeInHours % 24;
@@ -46,11 +47,11 @@ function formatTime(time) {
 /**
  * Inserts a text element next to the Follow and Subscribe buttons on a
  * Twitch channel.
- * @param {Object.<string, string>} channelTime - The channel name and time, in seconds.
+ * @param {Object.<string, number>} storedTime - The channel name and time, in seconds.
  */
-function injectTimeIndicator(channelTime) {
-  const time = Object.values(channelTime)[0];  // Should have one k:v pair.
-  const formattedTime = formatTime(time);
+function injectTimeIndicator(storedTime) {
+  CHANNEL_TIME = Object.values(storedTime)[0];  // Should have one k:v pair.
+  const formattedTime = formatTime(CHANNEL_TIME);
 
   let div = document.createElement("div");
   let text = document.createTextNode(formattedTime);
