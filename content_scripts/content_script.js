@@ -25,6 +25,25 @@ function getChannelName() {
 }
 
 /**
+ * Converts time in seconds to the form: `Watched: [${d} d] ${h} h`
+ * @param {string} time - Time, in seconds.
+ * @return {string} A formatted time string.
+ */
+function formatTime(time) {
+  const parsedTime = parseInt(time, 10);
+  const timeInHours = Math.floor(parsedTime / 3600);
+
+  const days = Math.floor(timeInHours / 24);
+  const hours = timeInHours % 24;
+
+  const formattedDays = days === 0 ? "" : `${days} d `;
+  const formattedHours = `${hours} h`;
+  const formattedTime = "Watched: " + formattedDays + formattedHours;
+
+  return formattedTime;
+}
+
+/**
  * Inserts a text element next to the Follow and Subscribe buttons on a
  * Twitch channel.
  * @param {Object.<string, string>} channelTime - The channel name and time, in seconds.
