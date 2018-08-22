@@ -76,7 +76,8 @@ function onError(error) {
  * @param {string} channelName - The channel name.
  */
 function setupForChannel(channelName) {
-  let gettingChannelTime = browser.storage.sync.get({ [channelName]: "0" });
+  CURRENT_CHANNEL = channelName;
+  let gettingChannelTime = browser.storage.sync.get({ [CURRENT_CHANNEL]: 0 });
   gettingChannelTime.then(injectTimeIndicator, onError);
 }
 
