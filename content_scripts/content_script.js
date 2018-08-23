@@ -1,6 +1,6 @@
-var CURRENT_CHANNEL = "";
-var CHANNEL_TIME = 0;
-var INTERVAL_SECONDS = 2;
+let CURRENT_CHANNEL = "";
+let CHANNEL_TIME = 0;
+let INTERVAL_SECONDS = 2;
 
 /**
  * Converts time in seconds to the form: `Watched: [${d} d] ${h} h`
@@ -30,7 +30,7 @@ function injectTimeIndicator(storedTime) {
   const formattedTime = formatTime(CHANNEL_TIME);
 
   let div = document.createElement("div");
-  let text = document.createTextNode(formattedTime);
+  const text = document.createTextNode(formattedTime);
 
   div.className = "twitch-time-display"
   div.appendChild(text);
@@ -53,7 +53,7 @@ function onError(error) {
  */
 function setupForChannel(channelName) {
   CURRENT_CHANNEL = channelName;
-  let gettingChannelTime = browser.storage.sync.get({ [CURRENT_CHANNEL]: 0 });
+  const gettingChannelTime = browser.storage.sync.get({ [CURRENT_CHANNEL]: 0 });
   gettingChannelTime.then(injectTimeIndicator, onError);
 }
 
@@ -77,7 +77,7 @@ function lazyUpdateTimeIndicator() {
  */
 function addWatchTime() {
   CHANNEL_TIME += INTERVAL_SECONDS;
-  let storingChannelTime = browser.storage.sync.set({ [CURRENT_CHANNEL]: CHANNEL_TIME});
+  const storingChannelTime = browser.storage.sync.set({ [CURRENT_CHANNEL]: CHANNEL_TIME});
   storingChannelTime.then(lazyUpdateTimeIndicator, onError);
 }
 
