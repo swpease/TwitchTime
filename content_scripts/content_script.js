@@ -82,6 +82,21 @@ function setupForChannel(channelName) {
 }
 
 /**
+ * Updates the text content of the time indicator element on the Twitch channel,
+ * IF there is a difference in the new text (i.e. on an hour / day rollover).
+ */
+function lazyUpdateTimeIndicator() {
+  let timeIndicator = document.querySelector(".twitch-time-display");
+
+  const oldFormattedTime = timeIndicator.textContent;
+  const newFormattedTime = formatTime(CHANNEL_TIME);
+
+  if (newFormattedTime !== oldFormattedTime) {
+    timeIndicator.textContent = newFormattedTime;
+  }
+}
+
+/**
  * Saves the new time spent watching to sync storage, and calls a UI updater.
  */
 function addWatchTime() {
