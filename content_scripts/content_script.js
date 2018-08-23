@@ -102,7 +102,7 @@ function lazyUpdateTimeIndicator() {
 function addWatchTime() {
   CHANNEL_TIME += INTERVAL_SECONDS;
   let storingChannelTime = browser.storage.sync.set({ [CURRENT_CHANNEL]: CHANNEL_TIME});
-  storingChannelTime.then(() => 0, onError);
+  storingChannelTime.then(lazyUpdateTimeIndicator, onError);
 }
 
 /**
