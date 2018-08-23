@@ -115,7 +115,7 @@ function main() {
   try {
     const channelName = getChannelName();
     if (channelName === CURRENT_CHANNEL) {
-      return
+      addWatchTime();
     } else {
       setupForChannel(channelName)
     }
