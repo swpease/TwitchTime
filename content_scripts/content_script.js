@@ -123,3 +123,5 @@ function main() {
     CURRENT_CHANNEL = "";
   }
 }
+
+window.setInterval(main, 1000 * INTERVAL_SECONDS);
