@@ -21,11 +21,23 @@ function formatTime(time) {
 }
 
 /**
+ * Removes the time indicator element from the Twitch page.
+ */
+function removeTimeIndicator() {
+  let timeIndicator = document.querySelector(".twitch-time-display");
+  if (timeIndicator !== null) {
+    timeIndicator.remove();
+  }
+}
+
+/**
  * Inserts a text element next to the Follow and Subscribe buttons on a
  * Twitch channel.
  * @param {Object.<string, number>} storedTime - The channel name and time, in seconds.
  */
 function injectTimeIndicator(storedTime) {
+  removeTimeIndicator();
+
   CHANNEL_TIME = Object.values(storedTime)[0];  // Should have one k:v pair.
   const formattedTime = formatTime(CHANNEL_TIME);
 
@@ -120,6 +132,7 @@ function main() {
       setupForChannel(channelName)
     }
   } catch (e) {
+    removeTimeIndicator();  // Not sure if needed.
     CURRENT_CHANNEL = "";
   }
 }
