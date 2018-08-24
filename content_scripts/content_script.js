@@ -76,11 +76,16 @@ function setupForChannel(channelName) {
 function lazyUpdateTimeIndicator() {
   let timeIndicator = document.querySelector(".twitch-time-display");
 
-  const oldFormattedTime = timeIndicator.textContent;
-  const newFormattedTime = formatTime(CHANNEL_TIME);
+  if (timeIndicator === null) {  // Happens if you go from VODs to livestream.
+    setupForChannel(CURRENT_CHANNEL);
 
-  if (newFormattedTime !== oldFormattedTime) {
-    timeIndicator.textContent = newFormattedTime;
+  } else {
+    const oldFormattedTime = timeIndicator.textContent;
+    const newFormattedTime = formatTime(CHANNEL_TIME);
+
+    if (newFormattedTime !== oldFormattedTime) {
+      timeIndicator.textContent = newFormattedTime;
+    }
   }
 }
 
