@@ -1,21 +1,44 @@
 let CURRENT_CHANNEL = "";
 let CHANNEL_TIME = 0;
 let INTERVAL_SECONDS = 2;
+let TOGGLE = false;
 
 /**
- * Converts time in seconds to the form: `Watched: [${d} d] ${h} h`
+ * Calculates the days, hours and minutes from the given seconds 
  * @param {number} time - Time, in seconds.
- * @return {string} A formatted time string.
+ * @return {object} A time object.
  */
-function formatTime(time) {
+function calcTime(time) {
+  const timeInMinutes = Math.floor(time/60);
   const timeInHours = Math.floor(time / 3600);
 
   const days = Math.floor(timeInHours / 24);
   const hours = timeInHours % 24;
+  const minutes = timeInMinutes % 60;
 
-  const formattedDays = days === 0 ? "" : `${days} d `;
-  const formattedHours = `${hours} h`;
-  const formattedTime = "Watched: " + formattedDays + formattedHours;
+  var time = {
+      days : days,
+      hours : hours,
+      minutes : minutes
+  };
+
+  return time;
+}
+
+/*Takes the time object and converts to the form: 'Watched: [${d} d] ${h} h ${m} m`
+ * @param {number} time - Time, in seconds.
+ * @return {string} A formatted time string.
+ */
+function formatTime(time) {
+  const formattedDays = time.days === 0 ? "" : `${time.days} d `;
+  const formattedHours = `${time.hours} h `;
+  const formattedMinutes = `${time.minutes} m`;
+
+  var formattedTime = "";
+  if(!TOGGLE)
+    formattedTime =  "Watched: " + formattedDays + formattedHours;
+  else
+    formattedTime =  "Watched: " + formattedDays + formattedHours + formattedMinutes;
 
   return formattedTime;
 }
@@ -37,18 +60,28 @@ function removeTimeIndicator() {
  */
 function injectTimeIndicator(storedTime) {
   removeTimeIndicator();
-
   CHANNEL_TIME = Object.values(storedTime)[0];  // Should have one k:v pair.
-  const formattedTime = formatTime(CHANNEL_TIME);
+  const formattedTime = formatTime(calcTime(CHANNEL_TIME));
 
   let div = document.createElement("div");
   const text = document.createTextNode(formattedTime);
 
   div.className = "twitch-time-display"
+  div.onclick = toggle;
   div.appendChild(text);
 
   let parent = document.querySelector("main div.channel-header__right")  // Brittle.
   parent.appendChild(div);
+}
+
+/**
+ * Toggles and instantly redraws with the new format
+ */
+function toggle() {
+  TOGGLE = !TOGGLE;
+  let timeIndicator = document.querySelector(".twitch-time-display");
+  const formattedTime = formatTime(calcTime(CHANNEL_TIME));
+  timeIndicator.textContent = formattedTime;
 }
 
 /**
@@ -81,7 +114,7 @@ function lazyUpdateTimeIndicator() {
 
   } else {
     const oldFormattedTime = timeIndicator.textContent;
-    const newFormattedTime = formatTime(CHANNEL_TIME);
+    const newFormattedTime = formatTime(calcTime(CHANNEL_TIME));
 
     if (newFormattedTime !== oldFormattedTime) {
       timeIndicator.textContent = newFormattedTime;
