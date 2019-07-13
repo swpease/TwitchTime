@@ -1,0 +1,46 @@
+body {
+    width: 350px;
+    background: #151515;
+    color: #ffffff;
+    padding: 0px;
+    margin: 5px;
+}
+
+h1 {
+    color: #DBE1B4;
+    margin: 5px;
+    padding 0px;
+    text-align: center;
+}
+
+.note {
+    font-size: 75%;
+}
+
+table {
+    width: 100%;
+}
+
+#scrolltable {
+    height: 200px;
+    overflow: auto;
+}
+th {
+    background-color: #505050;
+}
+tr:nth-child(even) {
+    background-color: #303030;
+}
+
+td:nth-child(1) {
+    text-align: left;
+}
+
+td:nth-child(2) {
+    text-align: right;
+}
+
+td:nth-child(1) a {
+    color: #ffffff;
+    text-decoration: none;
+}
