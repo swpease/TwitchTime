@@ -21,6 +21,15 @@ function assignDisplayFormat() {
 }
 
 /**
+ * For Preferences changes.
+ */
+function updateDisplayFormat(changes, area) {
+  if (changes.hasOwnProperty("displayFormat")) {
+    DISPLAY_FORMAT = changes.displayFormat.newValue;
+  }
+}
+
+/**
  * Converts time in seconds to one of the following forms:
  *   "blank"       = *no display*
  *   "watched-dh"  = `Watched: [${d} d] ${h} h`
@@ -181,5 +190,6 @@ function main() {
   }
 }
 
+browser.storage.onChanged.addListener(updateDisplayFormat);
 assignDisplayFormat();
 window.setInterval(main, 1000 * INTERVAL_SECONDS);
