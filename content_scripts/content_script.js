@@ -1,21 +1,67 @@
 let CURRENT_CHANNEL = "";
 let CHANNEL_TIME = 0;
 let INTERVAL_SECONDS = 2;
+let DISPLAY_FORMAT = "";
 
 /**
- * Converts time in seconds to the form: `Watched: [${d} d] ${h} h`
+ * Generic error handler.
+ */
+function onError(error) {
+  console.log(error);
+}
+
+/**
+ * For initially setting-up a format for the display widget.
+ */
+function assignDisplayFormat() {
+  const gettingDisplayFormat = browser.storage.sync.get({ displayFormat: "watched-dh" });
+  gettingDisplayFormat.then((result) => {
+    DISPLAY_FORMAT = result.displayFormat;
+  }, onError);
+}
+
+/**
+ * Converts time in seconds to one of the following forms:
+ *   "blank"       = *no display*
+ *   "watched-dh"  = `Watched: [${d} d] ${h} h`
+ *   "watched-dhm" = `Watched: [${d} d] [${h} h] ${m} m`
+ *   "dh"          = `[${d} d] ${h} h`
+ *   "dhm"         = `[${d} d] [${h} h] ${m} m`
  * @param {number} time - Time, in seconds.
  * @return {string} A formatted time string.
  */
 function formatTime(time) {
-  const timeInHours = Math.floor(time / 3600);
+  let formattedTime = ""
 
+  if (DISPLAY_FORMAT === "blank") {
+    return formattedTime;
+  }
+
+  if (["watched-dh", "watched-dhm"].includes(DISPLAY_FORMAT)) {
+    formattedTime = "Watched: ";
+  }
+
+  const timeInHours = Math.floor(time / 3600);
   const days = Math.floor(timeInHours / 24);
   const hours = timeInHours % 24;
 
-  const formattedDays = days === 0 ? "" : `${days} d `;
-  const formattedHours = `${hours} h`;
-  const formattedTime = "Watched: " + formattedDays + formattedHours;
+  if (["dh", "watched-dh"].includes(DISPLAY_FORMAT)) {
+    const formattedDays = days === 0 ? "" : `${days} d `;
+    const formattedHours = `${hours} h`;
+
+    formattedTime += formattedDays + formattedHours;
+  } else if (["dhm", "watched-dhm"].includes(DISPLAY_FORMAT)) {
+    const timeInMinutes = Math.floor(time / 60);
+    const minutes = timeInMinutes % 60;
+
+    const formattedDays = days === 0 ? "" : `${days} d `;
+    const formattedHours = days === 0 && hours === 0 ? "" : `${hours} h`;
+    const formattedMinutes = `${minutes} m`;
+
+    formattedTime += formattedDays + formattedHours + formattedMinutes;
+  } else {
+    formattedTime += `${days} d`;  // Just in case.
+  }
 
   return formattedTime;
 }
@@ -49,13 +95,6 @@ function injectTimeIndicator(storedTime) {
 
   let parent = document.querySelector("main div.channel-header__right")  // Brittle.
   parent.appendChild(div);
-}
-
-/**
- * Generic error handler.
- */
-function onError(error) {
-  console.log(error);
 }
 
 /**
@@ -142,4 +181,5 @@ function main() {
   }
 }
 
+assignDisplayFormat();
 window.setInterval(main, 1000 * INTERVAL_SECONDS);
