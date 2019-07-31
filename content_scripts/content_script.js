@@ -55,21 +55,21 @@ function formatTime(time) {
   const hours = timeInHours % 24;
 
   if (["dh", "watched-dh"].includes(DISPLAY_FORMAT)) {
-    const formattedDays = days === 0 ? "" : `${days} d `;
-    const formattedHours = `${hours} h`;
+    const formattedDays = `${days}:`;
+    const formattedHours = hours < 10 ? `0${hours}` : `${hours}`;
 
     formattedTime += formattedDays + formattedHours;
   } else if (["dhm", "watched-dhm"].includes(DISPLAY_FORMAT)) {
     const timeInMinutes = Math.floor(time / 60);
     const minutes = timeInMinutes % 60;
 
-    const formattedDays = days === 0 ? "" : `${days} d `;
-    const formattedHours = days === 0 && hours === 0 ? "" : `${hours} h`;
-    const formattedMinutes = `${minutes} m`;
+    const formattedDays = days === 0 ? "" : `${days}:`;
+    const formattedHours = hours < 10 ? `0${hours}:` : `${hours}:`;
+    const formattedMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
 
     formattedTime += formattedDays + formattedHours + formattedMinutes;
   } else {
-    formattedTime += `${days} d`;  // Just in case.
+    formattedTime += `${days}d`;  // Just in case.
   }
 
   return formattedTime;
