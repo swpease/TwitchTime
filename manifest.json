@@ -26,6 +26,13 @@
     }
   ],
 
+  "browser_action": {
+    "default_icon": "icons/twitch-time-48.png",
+    "default_title": "Twitch Time",
+    "default_popup": "popup/popup.html",
+    "browser_style": true
+  },
+
   "options_ui": {
     "page": "options/options.html",
     "browser_style": true
