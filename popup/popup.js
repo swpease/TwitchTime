@@ -37,7 +37,7 @@ function populateTable(data) {
   topChannels.sort((a, b) => b.time - a.time);
 
   let timeTable = document.getElementById("time-table");
-  topChannels.forEach(function(channel) {
+  for (const channel of topChannels) {
       let row = timeTable.insertRow(-1);
       let channelCell = row.insertCell(0);
       let timeCell = row.insertCell(1);
@@ -48,7 +48,7 @@ function populateTable(data) {
 
       channelCell.appendChild(link);
       timeCell.innerHTML = formatTime(channel.time);
-  });
+  }
 }
 
 function onOpened() {
