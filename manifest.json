@@ -27,10 +27,23 @@
   ],
 
   "browser_action": {
-    "default_icon": "icons/twitch-time-48.png",
+    "default_icon": {
+      "16": "icons/twitch-time-16-light.png",
+      "32": "icons/twitch-time-32-light.png",
+      "64": "icons/twitch-time-64-light.png"
+      },
     "default_title": "Twitch Time",
     "default_popup": "popup/popup.html",
-    "browser_style": true
+    "browser_style": true,
+    "theme_icons": [{
+      "light": "icons/twitch-time-16-light.png",
+      "dark": "icons/twitch-time-16.png",
+      "size": 16
+    }, {
+      "light": "icons/twitch-time-32-light.png",
+      "dark": "icons/twitch-time-32.png",
+      "size": 32
+    }]
   },
 
   "options_ui": {
