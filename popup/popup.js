@@ -51,4 +51,14 @@ function populateTable(data) {
   });
 }
 
+function onOpened() {
+  console.log(`Options page opened`);
+}
+
+function openOptions(event) {
+  var opening = browser.runtime.openOptionsPage();
+  opening.then(onOpened, onError);
+}
+
+document.querySelector("button").addEventListener("click", openOptions);
 browser.storage.sync.get().then(populateTable, onError);
