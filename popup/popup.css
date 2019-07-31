@@ -1,0 +1,35 @@
+body {
+    width: 250px;
+    padding: 5px;
+    overflow-x: hidden;
+}
+
+table {
+    width: 90%;
+}
+
+button {
+  max-width: 80px;
+  text-align: center;
+}
+
+th {
+    background-color: #d0d0d0;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+td:nth-child(1) {
+    text-align: left;
+}
+
+td:nth-child(2) {
+    text-align: right;
+    font-family: monospace;
+}
+
+td:nth-child(1) a {
+    text-decoration: none;
+}
