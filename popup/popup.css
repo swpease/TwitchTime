@@ -11,6 +11,7 @@ table {
 button {
   max-width: 80px;
   text-align: center;
+  cursor: pointer;
 }
 
 th {

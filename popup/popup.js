@@ -25,6 +25,10 @@ function formatTime(time) {
   return formattedTime;
 }
 
+/**
+ * For calling by storage get.
+ * Currently establishes a cut-off of 30 minutes minimum to display the channel.
+ */
 function populateTable(data) {
   let dataList = [];
   for (let [k, v] of Object.entries(data)) {
