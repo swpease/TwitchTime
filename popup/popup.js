@@ -48,10 +48,10 @@ function populateTable(data) {
 
       let link = document.createElement("a");
       link.href = "https://twitch.tv/" + channel.name;
-      link.innerHTML = channel.name;
+      link.innerText = channel.name;
 
       channelCell.appendChild(link);
-      timeCell.innerHTML = formatTime(channel.time);
+      timeCell.innerText = formatTime(channel.time);
   }
 }
 
