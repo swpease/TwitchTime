@@ -10,7 +10,7 @@
     }
   },
 
-  "description": "Adds an indicator of how long you have watched a Twitch channel.",
+  "description": "Keeps track of how long you have watched different Twitch channels.",
   "homepage_url": "https://github.com/swpease/TwitchTime",
 
   "icons": {
