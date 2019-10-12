@@ -35,7 +35,11 @@ function populateTable(data) {
     dataList.push({ name: k, time: v });
   }
 
-  const reservedWords = ["displayFormat"];
+  const reservedWords = ["friends", "subscriptions", "inventory",
+                         "payments", "settings", "displayFormat",
+                         "videos", "p", "random facts",
+                         "directory", "downloads", "jobs",
+                         "turbo"];
   let channels = dataList.filter(datum => !reservedWords.includes(datum.name));
   let topChannels = channels.filter(datum => datum.time > 1800);  // TODO: options besides 30 mins?
   topChannels.sort((a, b) => b.time - a.time);
