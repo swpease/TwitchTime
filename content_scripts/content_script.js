@@ -151,13 +151,10 @@ function addWatchTime() {
  * @return {string} The channel name.
  */
 function getChannelName() {
-  const pathname = window.location.pathname;
-  const splitPath = pathname.split("/");
-  const reservedWords = ["friends", "subscriptions", "inventory",
-                         "payments", "settings"]
+  const channelNameElement = document.querySelector("main .channel-header p");  // Brittle.
 
-  if (splitPath.length >= 2 && !reservedWords.includes(splitPath[1])) {
-    return splitPath[1];
+  if (channelNameElement) {
+    return channelNameElement.textContent.toLowerCase();  // *display* names have capitals, not account names.
   } else {
     throw new Error("Channel name not found.");
   }
