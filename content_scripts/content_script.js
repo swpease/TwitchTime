@@ -147,6 +147,22 @@ function addWatchTime() {
 }
 
 /**
+ * Checks if there is a video playing.
+ * @return {boolean}
+ */
+function isPlaying() {
+  // Not sure if there are ever multiple `video` elements on screen at once,
+  // so I just check if there is any playing video.
+  let vids = document.querySelectorAll('video');
+  for (const vid of vids) {
+    if (!vid.paused) {
+      return true;
+    }
+  }
+  return false;
+}
+
+/**
  * Gets the Twitch channel name if available. Raises an Error if name not found.
  * @return {string} The channel name.
  */
@@ -170,7 +186,9 @@ function main() {
   try {
     const channelName = getChannelName();
     if (channelName === CURRENT_CHANNEL) {
-      addWatchTime();
+      if (isPlaying()) {
+        addWatchTime();
+      }
     } else {
       setupForChannel(channelName)
     }
