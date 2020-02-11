@@ -2,6 +2,11 @@ body {
     width: 250px;
     padding: 5px;
     overflow-x: hidden;
+    overflow: scroll;
+}
+
+#scroll-table {
+  margin-bottom: 15px;
 }
 
 table {
@@ -12,6 +17,13 @@ button {
   max-width: 80px;
   text-align: center;
   cursor: pointer;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+input {
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 th {

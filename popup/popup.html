@@ -8,6 +8,7 @@
 
 <body>
   <button>Options</button>
+
   <div id="scroll-table">
     <table id="time-table">
       <tr>
@@ -16,6 +17,17 @@
       </tr>
     </table>
   </div>
+
+  <form>
+    <label for="chan-to-delete">Delete:</label>
+    <input
+      type="text"
+      id="chan-to-delete"
+      name="chan-to-delete"
+      placeholder="Channel resets to 0">
+    <input type="submit" value="Delete">
+  </form>
+
   <script src="popup.js"></script>
 </body>
 

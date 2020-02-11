@@ -1,6 +1,9 @@
 function onError(error) {
-    console.log(error);
+  console.log(error);
 }
+
+
+// Setting up the table of channels and times watched
 
 /**
  * Converts time in seconds to the following form:
@@ -59,6 +62,42 @@ function populateTable(data) {
   }
 }
 
+
+/* Deleting a channel
+  User types in a channel. If it exists, it is deleted from storage and the
+  displayed table. The text input is cleared regardless.
+*/
+
+function onRemoveError(error) {
+  e.preventDefault();
+  document.querySelector("#chan-to-delete").value = "";
+}
+
+function onRemoved() {
+  let textInput = document.querySelector("#chan-to-delete");
+  const channel = textInput.value.toLowerCase();
+
+  let rows = document.querySelectorAll("tr");
+  for (let row of rows) {
+    if (row.children[0].textContent == channel) {
+      row.remove();
+    }
+  }
+
+  document.querySelector("#chan-to-delete").value = "";
+}
+
+function deleteChannel(e) {
+  e.preventDefault();
+
+  const channel = document.querySelector("#chan-to-delete").value.toLowerCase();
+  let removeChannel = browser.storage.sync.remove(channel);
+  removeChannel.then(onRemoved, onRemoveError);
+}
+
+
+// Opening options
+
 function onOpened() {
   console.log(`Options page opened`);
 }
@@ -68,5 +107,9 @@ function openOptions(event) {
   opening.then(onOpened, onError);
 }
 
+
+// "main"
+
 document.querySelector("button").addEventListener("click", openOptions);
+document.querySelector("form").addEventListener("submit", deleteChannel);
 browser.storage.sync.get().then(populateTable, onError);
