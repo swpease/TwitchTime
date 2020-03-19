@@ -7,26 +7,35 @@
   </head>
 
 <body>
-  <button>Options</button>
 
-  <div id="scroll-table">
-    <table id="time-table">
-      <tr>
-        <th>Channel</th>
-        <th id="time-col">Time</th>
-      </tr>
-    </table>
+  <div class="content">
+    <div class="name_plate">
+      <p id="header" >Twitch Time</p>
+      <p id="developer">developed by <a href="https://addons.mozilla.org/en-US/firefox/user/12827844/">swpease</a></p>
+    </div>
+    <div id="scroll-table">
+      <table id="time-table">
+        <tr>
+          <th>Channel</th>
+          <th id="time-col">Time</th>
+        </tr>
+      </table>
+    </div>
+
+    <form class="delete">
+      <input
+        type="text"
+        id="chan-to-delete"
+        name="chan-to-delete"
+        placeholder="Channel name to reset">
+      <button type="submit">Delete</button>
+    </form>
+
+    <hr>
+
+    <button id="options" class=twitch_button>Options</button>
+    <button id="theme_toggle" class=twitch_button>Toggle theme</button>
   </div>
-
-  <form>
-    <label for="chan-to-delete">Delete:</label>
-    <input
-      type="text"
-      id="chan-to-delete"
-      name="chan-to-delete"
-      placeholder="Channel resets to 0">
-    <input type="submit" value="Delete">
-  </form>
 
   <script src="popup.js"></script>
 </body>

@@ -42,7 +42,7 @@ function populateTable(data) {
                          "payments", "settings", "displayFormat",
                          "videos", "p", "random facts",
                          "directory", "downloads", "jobs",
-                         "turbo"];
+                         "turbo", "darkThemeMode"];
   let channels = dataList.filter(datum => !reservedWords.includes(datum.name));
   let topChannels = channels.filter(datum => datum.time > 1800);  // TODO: options besides 30 mins?
   topChannels.sort((a, b) => b.time - a.time);
@@ -107,9 +107,31 @@ function openOptions(event) {
   opening.then(onOpened, onError);
 }
 
+function toggleTheme() {
+  console.log("Switching themes");
+  if (document.documentElement.hasAttribute('theme')) {
+      document.documentElement.removeAttribute('theme');
+      browser.storage.sync.set({darkThemeMode: false});
+  } else {
+      document.documentElement.setAttribute('theme', 'dark');
+      browser.storage.sync.set({darkThemeMode: true});
+  }
+
+}
+
+function setTheme(theme) {
+    if (theme.darkThemeMode)
+      document.documentElement.setAttribute('theme', 'dark');
+    else
+      document.documentElement.removeAttribute('theme');
+
+}
+
 
 // "main"
 
-document.querySelector("button").addEventListener("click", openOptions);
+document.querySelector("#options").addEventListener("click", openOptions);
 document.querySelector("form").addEventListener("submit", deleteChannel);
+document.querySelector("#theme_toggle").addEventListener("click", toggleTheme);
+browser.storage.sync.get({darkThemeMode: false}).then(setTheme, onError);
 browser.storage.sync.get().then(populateTable, onError);
