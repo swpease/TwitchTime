@@ -1,37 +1,134 @@
+:root {
+    /* fits both */
+    --twitch-pink-color-1: #772ce8;
+    --twitch-pink-color-2: #a970ff;
+    --twitch-pink-color-3: #9147ff;
+    --normal-border-radius: 4px;
+    --twitch-live-red: #e91916;
+
+    /* defaults */
+    --primary-bg-color: #f7f7f8;
+    --secondary-bg-color: #efeff1;
+    --text-color: #0e0e10;
+    --btn-text-color: #efeff1;
+    --bg-search-color-1 : rgba(0,0,0,0.05);
+    --bg-search-color-2 : rgba(0,0,0,0.1);;
+    --bg-search-color-3 : rgba(0,0,0,0.15);
+    --search-text-color: #0e0e10;
+
+}
+
+:root[theme='dark'] {
+    --primary-bg-color: #18181b;
+    --secondary-bg-color: #1f1f23;
+    --text-color: #efeff1;
+    --bg-search-color-1 : rgba(255,255,255,0.15);
+    --bg-search-color-2 : rgba(255,255,255,0.1);;
+    --bg-search-color-3 : rgba(255,255,255,0.3);
+    --search-text-color: #efeff1;
+    --btn-text-color: #efeff1;
+}
+
 body {
     width: 250px;
     padding: 5px;
-    overflow-x: hidden;
-    overflow: scroll;
+    overflow: auto;
+    background-color: var(--primary-bg-color);
+    color: var(--text-color);
+}
+
+.content {
+    max-width: 90%;
+    margin: auto;
+}
+
+h1 {
+    color: var(--text-color);
+    text-align: center;
+}
+
+.name_plate {
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.name_plate #header{
+    color: var(--text-color);
+    font-size: large;
+    font-weight: 1000;
+    text-align: center;
+    margin-bottom: 0px;
+}
+
+.name_plate #developer{
+    color: var(--text-color);
+    font-size: x-small;
+    text-align: right;
+}
+
+
+.name_plate a{
+    color: var(--twitch-pink-color-3)
 }
 
 #scroll-table {
-  margin-bottom: 15px;
+    margin-bottom: 15px;
 }
 
 table {
-    width: 90%;
+    width: 100%;
 }
 
-button {
-  max-width: 80px;
-  text-align: center;
-  cursor: pointer;
-  margin-top: 5px;
-  margin-bottom: 5px;
+.twitch_button {
+    max-width: 120px;
+    text-align: center;
+    cursor: pointer;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-radius: var(--normal-border-radius);
+    height: 2rem;
+    border: none;
+    background-color: var(--twitch-pink-color-3);
+    color: var(--btn-text-color);
+    font-weight: 600;
 }
 
-input {
-  margin-top: 5px;
-  margin-bottom: 5px;
+button:hover {
+    background-color: var(--twitch-pink-color-1);
+}
+
+form.delete input[type=text] {
+    background-color: var(--bg-search-color-1);
+    color: var(--search-text-color);
+    padding: 5px;
+    margin-right: 2px;
+    border: none;
+    border-top-left-radius: var(--normal-border-radius);
+    border-bottom-left-radius: var(--normal-border-radius);
+    width: 75%;
+    float: left;
+}
+
+form.delete button {
+    background-color: var(--bg-search-color-2);
+    color: var(--twitch-live-red);
+    padding: 5px;
+    border: none;
+    border-top-right-radius: var(--normal-border-radius);
+    border-bottom-right-radius: var(--normal-border-radius);
+    cursor: pointer;
+}
+
+form.delete button:hover {
+    background-color: var(--bg-search-color-3);
 }
 
 th {
-    background-color: #d0d0d0;
+    background-color: var(--secondary-bg-color);
 }
 
 tr:nth-child(even) {
-    background-color: #f2f2f2;
+    background-color: var(--secondary-bg-color);
 }
 
 td:nth-child(1) {
@@ -45,4 +142,9 @@ td:nth-child(2) {
 
 td:nth-child(1) a {
     text-decoration: none;
+    color: var(--twitch-pink-color-3);
+}
+
+td:nth-child(1) a:hover {
+    text-decoration: underline;
 }
