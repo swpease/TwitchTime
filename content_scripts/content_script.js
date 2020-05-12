@@ -167,7 +167,7 @@ function isPlaying() {
  * @return {string} The channel name.
  */
 function getChannelName() {
-  const channelNameElement = document.querySelector("main .channel-header p");  // Brittle.
+  const channelNameElement = document.querySelector("main h1");  // Brittle.
 
   if (channelNameElement) {
     return channelNameElement.textContent.toLowerCase();  // *display* names have capitals, not account names.
