@@ -91,7 +91,7 @@ function deleteChannel(e) {
   e.preventDefault();
 
   const channel = document.querySelector("#chan-to-delete").value.toLowerCase();
-  let removeChannel = browser.storage.sync.remove(channel);
+  let removeChannel = browser.storage.local.remove(channel);
   removeChannel.then(onRemoved, onRemoveError);
 }
 
@@ -111,10 +111,10 @@ function toggleTheme() {
   console.log("Switching themes");
   if (document.documentElement.hasAttribute('theme')) {
       document.documentElement.removeAttribute('theme');
-      browser.storage.sync.set({darkThemeMode: false});
+      browser.storage.local.set({darkThemeMode: false});
   } else {
       document.documentElement.setAttribute('theme', 'dark');
-      browser.storage.sync.set({darkThemeMode: true});
+      browser.storage.local.set({darkThemeMode: true});
   }
 
 }
@@ -133,5 +133,5 @@ function setTheme(theme) {
 document.querySelector("#options").addEventListener("click", openOptions);
 document.querySelector("form").addEventListener("submit", deleteChannel);
 document.querySelector("#theme_toggle").addEventListener("click", toggleTheme);
-browser.storage.sync.get({darkThemeMode: false}).then(setTheme, onError);
-browser.storage.sync.get().then(populateTable, onError);
+browser.storage.local.get({darkThemeMode: false}).then(setTheme, onError);
+browser.storage.local.get().then(populateTable, onError);

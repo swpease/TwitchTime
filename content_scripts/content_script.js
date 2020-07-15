@@ -14,7 +14,7 @@ function onError(error) {
  * For initially setting-up a format for the display widget.
  */
 function assignDisplayFormat() {
-  const gettingDisplayFormat = browser.storage.sync.get({ displayFormat: "watched-dh" });
+  const gettingDisplayFormat = browser.storage.local.get({ displayFormat: "watched-dh" });
   gettingDisplayFormat.then((result) => {
     DISPLAY_FORMAT = result.displayFormat;
   }, onError);
@@ -113,7 +113,7 @@ function injectTimeIndicator(storedTime) {
  */
 function setupForChannel(channelName) {
   CURRENT_CHANNEL = channelName;
-  const gettingChannelTime = browser.storage.sync.get({ [CURRENT_CHANNEL]: 0 });
+  const gettingChannelTime = browser.storage.local.get({ [CURRENT_CHANNEL]: 0 });
   gettingChannelTime.then(injectTimeIndicator, onError);
 }
 
@@ -142,7 +142,7 @@ function lazyUpdateTimeIndicator() {
  */
 function addWatchTime() {
   CHANNEL_TIME += INTERVAL_SECONDS;
-  const storingChannelTime = browser.storage.sync.set({ [CURRENT_CHANNEL]: CHANNEL_TIME});
+  const storingChannelTime = browser.storage.local.set({ [CURRENT_CHANNEL]: CHANNEL_TIME});
   storingChannelTime.then(lazyUpdateTimeIndicator, onError);
 }
 

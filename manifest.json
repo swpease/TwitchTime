@@ -2,7 +2,7 @@
 
   "manifest_version": 2,
   "name": "TwitchTime",
-  "version": "1.7",
+  "version": "2.0",
   "browser_specific_settings": {
     "gecko": {
       "id": "twitchtime@notactuallytwitch.com",
@@ -25,6 +25,10 @@
       "css": ["content_scripts/content_script.css"]
     }
   ],
+
+  "background": {
+    "scripts": ["background_scripts/background_script.js"]
+  },
 
   "browser_action": {
     "default_icon": {

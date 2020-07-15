@@ -2,7 +2,7 @@
  * Saves the preferred format for what is displayed on the Twitch webpage.
  */
 function saveDisplayFormat(e) {
-  browser.storage.sync.set({
+  browser.storage.local.set({
     displayFormat: document.querySelector("#tt-display").value
   });
 
@@ -13,7 +13,7 @@ function saveDisplayFormat(e) {
  * Sets the <select> to the current saved format.
  */
 function restoreDisplayFormat() {
-  let gettingFormat = browser.storage.sync.get({ displayFormat: "watched-dh" });
+  let gettingFormat = browser.storage.local.get({ displayFormat: "watched-dh" });
 
   gettingFormat.then((res) => {
     document.querySelector("#tt-display").value = res.displayFormat;
