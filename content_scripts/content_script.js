@@ -102,7 +102,7 @@ function injectTimeIndicator(storedTime) {
   div.className = "twitch-time-display"
   div.appendChild(text);
 
-  let parent = document.querySelector("main div.channel-header__right")  // Brittle.
+  let parent = document.querySelector("main div[data-target='channel-header-right']");  // Brittle.
   parent.appendChild(div);
 }
 
