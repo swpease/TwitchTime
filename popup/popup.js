@@ -96,6 +96,50 @@ function deleteChannel(e) {
 }
 
 
+// Delete All
+
+/**
+ * Replace the Delete All btn with the Confirm / Cancel btns.
+ */
+function checkDeleteAll() {
+  let deleteAllBtn = document.querySelector("#delete-all");
+  let confirmEl = document.querySelector("#confirmation");
+
+  confirmEl.style.display = "initial";
+  deleteAllBtn.style.display = "none";
+}
+
+/**
+ * Revert to initial view.
+ */
+function cancelDeleteAll() {
+  let deleteAllBtn = document.querySelector("#delete-all");
+  let confirmEl = document.querySelector("#confirmation");
+
+  confirmEl.style.display = "none";
+  deleteAllBtn.style.display = "initial";
+}
+
+/**
+ * I can't easily test this without deleting all my own data, so I'm just relying on user feedback for bugs...
+ */
+function confirmDeleteAll() {
+  // Keep the user time display settings.
+  let displayFormat = {};
+  let gettingDisplayFormat = browser.storage.sync.get({ "displayFormat": "watched-dh" });
+  gettingDisplayFormat.then((result) => {
+    displayFormat = result;
+  }, onError);
+
+  let clearingAllData = browser.storage.sync.clear();
+  clearingAllData
+    .then(() => browser.storage.sync.set(displayFormat))
+    .catch(onError)
+
+  window.close();
+}
+
+
 // Opening options
 
 function onOpened() {
@@ -133,5 +177,8 @@ function setTheme(theme) {
 document.querySelector("#options").addEventListener("click", openOptions);
 document.querySelector("form").addEventListener("submit", deleteChannel);
 document.querySelector("#theme_toggle").addEventListener("click", toggleTheme);
+document.querySelector("#delete-all").addEventListener("click", checkDeleteAll);
+document.querySelector("#cancel-delete-all").addEventListener("click", cancelDeleteAll);
+document.querySelector("#confirm-delete-all").addEventListener("click", confirmDeleteAll);
 browser.storage.sync.get({darkThemeMode: false}).then(setTheme, onError);
 browser.storage.sync.get().then(populateTable, onError);

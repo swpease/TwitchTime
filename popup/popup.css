@@ -32,6 +32,7 @@
 body {
     width: 250px;
     padding: 5px;
+    margin: 0px 15px 75px 0px;
     overflow: auto;
     background-color: var(--primary-bg-color);
     color: var(--text-color);
@@ -40,11 +41,6 @@ body {
 .content {
     max-width: 90%;
     margin: auto;
-}
-
-h1 {
-    color: var(--text-color);
-    text-align: center;
 }
 
 .name_plate {
@@ -121,6 +117,28 @@ form.delete button {
 
 form.delete button:hover {
     background-color: var(--bg-search-color-3);
+}
+
+#delete-all, .confirmation-btn {
+    background-color: var(--bg-search-color-2);
+    color: var(--twitch-live-red);
+    padding: 5px;
+    margin-top: 5px;
+    border: none;
+    border-radius: var(--normal-border-radius);
+    cursor: pointer;
+}
+
+#delete-all:hover, .confirmation-btn:hover {
+    background-color: var(--bg-search-color-3);
+}
+
+#confirmation {
+    display: none;
+}
+
+#cancel-delete-all {
+    color: var(--btn-text-color);
 }
 
 th {
