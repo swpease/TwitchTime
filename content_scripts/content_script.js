@@ -24,7 +24,7 @@ function assignDisplayFormat() {
  * For Preferences changes.
  */
 function updateDisplayFormat(changes, area) {
-  if (changes.hasOwnProperty("displayFormat")) {
+  if (changes.hasOwnProperty("displayFormat") && changes.displayFormat.hasOwnProperty("newValue")) {
     DISPLAY_FORMAT = changes.displayFormat.newValue;
   }
 }
