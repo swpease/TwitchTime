@@ -177,6 +177,16 @@ function getChannelName() {
 }
 
 /**
+ * For syncs from server for multi-device users.
+ * Redundantly overwrites CHANNEL_TIME on normal updates, but that shouldn't matter.
+ */
+function mergeSyncedData(changes, area) {
+  if (changes.hasOwnProperty(CURRENT_CHANNEL) && changes[CURRENT_CHANNEL].hasOwnProperty("newValue")) {
+    CHANNEL_TIME = changes[CURRENT_CHANNEL].newValue;
+  }
+}
+
+/**
  * If it can find a channel name, it either:
  * 1. updates the time spent watching
  * 2. sets stuff up for a newly navigated-to channel
@@ -199,5 +209,6 @@ function main() {
 }
 
 browser.storage.onChanged.addListener(updateDisplayFormat);
+browser.storage.onChanged.addListener(mergeSyncedData);
 assignDisplayFormat();
 window.setInterval(main, 1000 * INTERVAL_SECONDS);
